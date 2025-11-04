@@ -17,6 +17,16 @@ public class UsuarioService {
     }
 
     public Usuario editar(UsuarioEditarDto usuarioEditarDto) {
-        return null;
+
+
+        Usuario usuarioExistente = usuarioRepository.findById(usuarioEditarDto.id())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        usuarioExistente.setNome(usuarioEditarDto.nome());
+        usuarioExistente.setEmail(usuarioEditarDto.email());
+        usuarioExistente.setSenha(usuarioEditarDto.senha());
+
+        return usuarioRepository.save(usuarioExistente);
     }
+
 }

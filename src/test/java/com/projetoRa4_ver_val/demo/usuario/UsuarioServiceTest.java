@@ -6,6 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -32,17 +34,17 @@ public class UsuarioServiceTest {
     @Test
     void DeveEditarUsuario() {
         // given
-        Usuario usuarioExistente = new Usuario(1, "Eduardo", "eduardo@gmail.com", "senha");
-        UsuarioEditarDto usuarioEditarDto = new UsuarioEditarDto("Dudu", "eduardo@gmail.com", "senha");
+        Usuario usuarioExistente = new Usuario(1L, "Eduardo", "eduardo@gmail.com", "senha");
+        UsuarioEditarDto usuarioEditarDto = new UsuarioEditarDto(1L, "Dudu", "eduardo@gmail.com", "senha");
 
         // when
-        Usuario usuario = null;
-        when(repository.save(any(Usuario.class))).thenReturn(usuario);
+        when(repository.findById(1L)).thenReturn(Optional.of(usuarioExistente));
+        when(repository.save(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0)); 
 
         // then
         Usuario usuarioEditado = service.editar(usuarioEditarDto);
-        assertEquals("Dudu", usuarioEditado.getNome());
 
+        assertEquals("Dudu", usuarioEditado.getNome());
     }
 
 }
