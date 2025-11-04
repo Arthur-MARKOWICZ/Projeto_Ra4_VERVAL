@@ -28,4 +28,27 @@ public class Livro {
         this.genero = dto.genero();
         this.emprestado = false;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int getNumeroDePagina() {
+        return numeroDePagina;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public boolean isEmprestado() {
+        return emprestado;
+    }
+
+    public Livro(Long id, String titulo, int numeroDePagina, String genero, boolean emprestado) {
+    }
 }
