@@ -21,10 +21,11 @@ public class Livro {
     private String titulo;
     private int numeroDePagina;
     private String genero;
-
+    private boolean emprestado;
     public Livro(LivroCadastroDto dto) {
         this.titulo = dto.titulo();
         this.numeroDePagina = dto.numeroDePagina();
         this.genero = dto.genero();
+        this.emprestado = false;
     }
 }

@@ -16,8 +16,6 @@ public class UsuarioServiceTest {
     private UsuarioRepository repository;
     @InjectMocks
     private UsuarioService service;
-
-
     @Test
     void DeveCadastrarUsuario(){
         // give
