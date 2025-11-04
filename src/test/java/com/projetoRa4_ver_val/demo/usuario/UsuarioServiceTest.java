@@ -24,7 +24,9 @@ public class UsuarioServiceTest {
         UsuarioCadastroDto usuarioCadastroDto = new UsuarioCadastroDto("test","test@test.com",
                 "test");
         Usuario usuario = service.cadastro(usuarioCadastroDto);
+        //when
         when(repository.save(any(Usuario.class))).thenReturn(usuario);
+        //then
         Usuario usuarioCadastrado = service.cadastro(usuarioCadastroDto);
         assertEquals("test", usuarioCadastrado.getNome());
     }
