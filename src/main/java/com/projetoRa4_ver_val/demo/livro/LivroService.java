@@ -16,7 +16,17 @@ public class LivroService {
         return livro;
     }
 
-    public Livro editar(LivroEditarDto livroEditarDto) {
-        return null;
+    public Livro editar(LivroEditarDto dto) {
+        Livro livroExistente = repository.findById(dto.id())
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        livroExistente.setTitulo(dto.titulo());
+        livroExistente.setNumeroDePagina(dto.numeroDePagina());
+        livroExistente.setGenero(dto.genero());
+        livroExistente.setEmprestado(dto.emprestado());
+
+        return repository.save(livroExistente);
     }
+
+
 }

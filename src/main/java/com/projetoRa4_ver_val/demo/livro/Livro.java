@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class Livro {
     @Id
@@ -50,5 +50,25 @@ public class Livro {
     }
 
     public Livro(Long id, String titulo, int numeroDePagina, String genero, boolean emprestado) {
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setNumeroDePagina(int numeroDePagina) {
+        this.numeroDePagina = numeroDePagina;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public void setEmprestado(boolean emprestado) {
+        this.emprestado = emprestado;
     }
 }

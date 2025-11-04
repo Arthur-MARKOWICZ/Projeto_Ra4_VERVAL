@@ -39,7 +39,7 @@ public class UsuarioServiceTest {
 
         // when
         when(repository.findById(1L)).thenReturn(Optional.of(usuarioExistente));
-        when(repository.save(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0)); 
+        when(repository.save(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // then
         Usuario usuarioEditado = service.editar(usuarioEditarDto);

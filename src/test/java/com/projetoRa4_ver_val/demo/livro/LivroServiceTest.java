@@ -33,7 +33,7 @@ public class LivroServiceTest {
     void DeveEditarLivro() {
         // given
         Livro livroExistente = new Livro(1l, "Teste", 34, "Fabula", false );
-        LivroEditarDto livroEditarDto = new LivroEditarDto( "Teste", 40, "Fabula", false);
+        LivroEditarDto livroEditarDto = new LivroEditarDto(1l, "Teste", 40, "Fabula", false);
 
         // when
         Livro livro = null;
