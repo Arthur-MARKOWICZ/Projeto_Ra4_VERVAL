@@ -15,4 +15,8 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
         return usuario;
     }
+
+    public Usuario editar(UsuarioEditarDto usuarioEditarDto) {
+        return null;
+    }
 }

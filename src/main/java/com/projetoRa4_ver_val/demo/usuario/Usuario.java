@@ -27,4 +27,25 @@ public class Usuario {
         this.email = dto.email();
         this.senha = dto.senha();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public Usuario(long id, String nome, String email, String senha) {
+    }
+
+
 }

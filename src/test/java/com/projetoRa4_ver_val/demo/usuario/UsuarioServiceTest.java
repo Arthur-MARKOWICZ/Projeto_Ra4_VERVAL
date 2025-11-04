@@ -31,4 +31,20 @@ public class UsuarioServiceTest {
         assertEquals("test", usuarioCadastrado.getNome());
     }
 
+    @Test
+    void DeveEditarUsuario() {
+        // given
+        Usuario usuarioExistente = new Usuario(1, "Eduardo", "eduardo@gmail.com", "senha");
+        UsuarioEditarDto usuarioEditarDto = new UsuarioEditarDto("Dudu", "eduardo@gmail.com", "senha");
+
+        // when
+        Usuario usuario = null;
+        when(repository.save(any(Usuario.class))).thenReturn(usuario);
+
+        // then
+        Usuario usuarioEditado = service.editar(usuarioEditarDto);
+        assertEquals("Dudu", usuarioEditado.getNome());
+
+    }
+
 }
