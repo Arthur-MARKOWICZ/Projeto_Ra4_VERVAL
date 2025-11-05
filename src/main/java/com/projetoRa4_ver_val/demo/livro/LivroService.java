@@ -27,6 +27,14 @@ public class LivroService {
 
         return repository.save(livroExistente);
     }
+    public Livro deletar(LivroDeletarDto dto){
+        Livro livro = repository.findById(dto.id())
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        repository.delete(livro);
+
+        return livro;
+    }
 
 
 }
