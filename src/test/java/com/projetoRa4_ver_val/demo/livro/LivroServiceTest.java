@@ -1,5 +1,6 @@
 package com.projetoRa4_ver_val.demo.livro;
 
+import com.projetoRa4_ver_val.demo.usuario.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -8,8 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -20,6 +20,12 @@ public class LivroServiceTest {
 
     @InjectMocks
     private LivroService service;
+
+    @Mock
+    private UsuarioService service_user;
+
+    @Mock
+    private UsuarioRepository repository_user;
 
 
     @Test
@@ -36,7 +42,6 @@ public class LivroServiceTest {
         assertEquals("test", livroCadastrado.getTitulo());
     }
 
-
     @Test
     void DeveEditarLivro() {
         // given
@@ -51,8 +56,6 @@ public class LivroServiceTest {
         Livro livroEditado = service.editar(livroEditarDto);
         assertEquals(40, livroEditado.getNumeroDePagina());
     }
-
-
 
     @Test
     void DeveDeletarLivro() {
@@ -69,5 +72,34 @@ public class LivroServiceTest {
         verify(repository).delete(livro);
     }
 
-}
+    @Test
+    void DeveEmprestarLivro() {
+        // given
+        Long idLivro = 1L;
+        Long idUsuario = 1L;
 
+        Livro livro = new Livro(1L, "Teste", 40, "Fabula", false);
+        Usuario usuario = new Usuario(1L, "Teste", "teste@email.com", "123");
+
+        when(repository.findById(idLivro)).thenReturn(Optional.of(livro));
+        when(repository_user.findById(idUsuario)).thenReturn(Optional.of(usuario));
+
+        // when
+        service.emprestarLivro(idLivro, idUsuario);
+
+        // then
+        verify(repository).save(livro);
+    }
+
+    @Test
+    void DeveDevolverLivro() {
+        // given
+        Livro livro = new Livro(1L, "Teste", 40, "Fabula", true);
+        when(repository.findById(1L)).thenReturn(Optional.of(livro));
+        // when
+        service.devolverLivro(1L);
+        // then
+        assertFalse(livro.isEmprestado());
+        verify(repository).save(livro);
+    }
+}

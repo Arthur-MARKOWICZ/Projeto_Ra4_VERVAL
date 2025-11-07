@@ -1,9 +1,7 @@
 package com.projetoRa4_ver_val.demo.livro;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.projetoRa4_ver_val.demo.usuario.Usuario;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +13,8 @@ import lombok.Setter;
 
 @NoArgsConstructor
 public class Livro {
+    @ManyToOne
+    private Usuario usuarioEmprestado;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
