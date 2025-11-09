@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,5 +47,23 @@ public class UsuarioServiceTest {
 
         assertEquals("Dudu", usuarioEditado.getNome());
     }
+
+
+    @Test
+    void DeveDeletarUsuario() {
+        // given
+        Long id = 1L;
+        Usuario usuarioExistente = new Usuario(1L, "Eduardo", "eduardo@gmail.com", "senha");
+
+        // when
+        when(repository.findById(id)).thenReturn(Optional.of(usuarioExistente));
+
+        // then
+        service.deletar(id);
+
+        verify(repository).deleteById(id);
+    }
+
+
 
 }
