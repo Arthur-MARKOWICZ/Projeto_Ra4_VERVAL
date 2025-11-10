@@ -1,6 +1,7 @@
 package com.projetoRa4_ver_val.demo.livro;
 
-import com.projetoRa4_ver_val.demo.usuario.*;
+import com.projetoRa4_ver_val.demo.usuario.Usuario;
+import com.projetoRa4_ver_val.demo.usuario.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,12 +16,11 @@ public class LivroService {
 
     public Livro cadastro(LivroCadastroDto dto){
         Livro livro = new Livro(dto);
-        repository.save(livro);
-        return livro;
+        return repository.save(livro);
     }
 
-    public Livro editar(LivroEditarDto dto) {
-        Livro livroExistente = repository.findById(dto.id())
+    public Livro editar(Long id, LivroEditarDto dto) {
+        Livro livroExistente = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 
         livroExistente.setTitulo(dto.titulo());
@@ -40,7 +40,6 @@ public class LivroService {
     }
 
     public Livro emprestarLivro(Long idLivro, Long idUsuario) {
-
         Livro livro = repository.findById(idLivro)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 
@@ -56,7 +55,6 @@ public class LivroService {
     }
 
     public Livro devolverLivro(long idLivro) {
-
         Livro livro = repository.findById(idLivro)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 

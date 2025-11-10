@@ -19,6 +19,15 @@ public class LivroController {
         return ResponseEntity.status(201).body(livro);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Livro> editar(
+            @PathVariable Long id,
+            @RequestBody LivroEditarDto dto
+    ) {
+        var livroEditado = service.editar(id, dto);
+        return ResponseEntity.ok(livroEditado);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         service.deletar(new LivroDeletarDto(id));

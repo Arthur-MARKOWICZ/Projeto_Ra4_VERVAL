@@ -36,17 +36,19 @@ public class UsuarioServiceTest {
     void DeveEditarUsuario() {
         // given
         Usuario usuarioExistente = new Usuario(1L, "Eduardo", "eduardo@gmail.com", "senha");
-        UsuarioEditarDto usuarioEditarDto = new UsuarioEditarDto(1L, "Dudu", "eduardo@gmail.com", "senha");
+        UsuarioEditarDto usuarioEditarDto = new UsuarioEditarDto("Dudu", "eduardo@gmail.com", "senha");
 
         // when
         when(repository.findById(1L)).thenReturn(Optional.of(usuarioExistente));
         when(repository.save(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // then
-        Usuario usuarioEditado = service.editar(usuarioEditarDto);
+        Usuario usuarioEditado = service.editar(1L, usuarioEditarDto);
 
+        // then
         assertEquals("Dudu", usuarioEditado.getNome());
+        assertEquals("eduardo@gmail.com", usuarioEditado.getEmail());
     }
+
 
 
     @Test

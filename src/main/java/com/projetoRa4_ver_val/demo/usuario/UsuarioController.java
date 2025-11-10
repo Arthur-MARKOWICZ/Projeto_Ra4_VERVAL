@@ -19,6 +19,15 @@ public class UsuarioController {
         return ResponseEntity.status(201).body(usuario);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> editar(
+            @PathVariable Long id,
+            @RequestBody UsuarioEditarDto dto) {
+
+        var usuarioEditado = usuarioService.editar(id, dto);
+        return ResponseEntity.ok(usuarioEditado);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         usuarioService.deletar(id);

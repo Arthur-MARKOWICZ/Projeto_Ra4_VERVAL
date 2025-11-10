@@ -46,16 +46,19 @@ public class LivroServiceTest {
     void DeveEditarLivro() {
         // given
         Livro livroExistente = new Livro(1L, "Teste", 34, "Fabula", false);
-        LivroEditarDto livroEditarDto = new LivroEditarDto(1L, "Teste", 40, "Fabula", false);
+        LivroEditarDto livroEditarDto = new LivroEditarDto("Teste", 40, "Fabula", false);
 
         // when
         when(repository.findById(1L)).thenReturn(Optional.of(livroExistente));
-        when(repository.save(any(Livro.class))).thenAnswer(inv -> inv.getArgument(0));
+        when(repository.save(any(Livro.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        Livro livroEditado = service.editar(1L, livroEditarDto);
 
         // then
-        Livro livroEditado = service.editar(livroEditarDto);
         assertEquals(40, livroEditado.getNumeroDePagina());
+        assertEquals("Teste", livroEditado.getTitulo());
     }
+
 
     @Test
     void DeveDeletarLivro() {
